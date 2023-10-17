@@ -30,6 +30,14 @@ def load_users():
 
 users = load_users()
 
+def user_loader(self, callback):
+    self._user_callback = callback
+    return self._user_callback
+
+def request_loader(self, callback):
+    self._request_callback = callback
+    return self._request_callback
+
 
 def load_user(user_id):
     return User.get(int(user_id))
@@ -42,8 +50,8 @@ def home():
     ##return render_template('home.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/<login>', methods=['GET', 'POST'])
+def login(login):
     if request.method == 'POST':
         user_id = request.form['username']
         password = request.form['password']
@@ -56,7 +64,7 @@ def login():
             return 'Login Failed'
 
     return "LOGIN FUNCTIONS TO BE IMPLEMENTED"
-    ## return render_template('login.html')
+    ##return render_template('login.html')
 
 
 if __name__ == '__main__':
